@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import DayPicker from './DayPicker/DayPicker'
+import CommentForm from '../CommentForm/CommentForm'
+
 
 class UserForm extends Component {
     static propTypes = {}
@@ -11,7 +14,11 @@ class UserForm extends Component {
     render() {
         return (
             <div>
+                <hr />
+                <DayPicker />
+                <CommentForm />
                 Name: <input type="text" value = {this.state.username} onChange = {this.handleUserChange.bind(this)}/>
+                <hr />
             </div>
         );
     }

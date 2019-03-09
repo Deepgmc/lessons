@@ -1,8 +1,9 @@
 import React from 'react'
-import ArticleList from './ArticleList'
-import UserForm from './UserForm/UserForm'
+import ArticleList from '../ArticleList'
+import UserForm from '../UserForm/UserForm'
 import ReactSelect from 'react-select'
-import { articles } from '../fixtures';
+import { articles } from '../../fixtures';
+import './globalStyle.css';
 
 export default class App extends React.Component {
 
