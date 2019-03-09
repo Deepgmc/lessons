@@ -1,5 +1,5 @@
 import React from 'react'
-import Comment from './Comment'
+import Comment from './Comment/Comment'
 import PropTypes from 'prop-types';
 import toggleOpen from '../decorators/toggleOpen';
 
@@ -10,7 +10,7 @@ class CommentsList extends React.Component {
     }
 
     static propTypes = {
-        comments: PropTypes.array
+        comments: PropTypes.array.isRequired
     }
 
     render(){
