@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Article from './Article/Article'
 import PropTypes from 'prop-types'
 import accordeon from '../decorators/accordeon'
+import {connect} from 'react-redux';
 
 class ArticleList extends React.Component {
 
@@ -19,15 +20,15 @@ class ArticleList extends React.Component {
         let {toggleOpen} = this.props,
             openArticleId = this.props.openItemId,
             articleElements = this.props.articles.map(
-            (article) => {
-                return (<li key={article.id}>
-                    <Article
-                        article={article}
-                        isOpen={openArticleId === article.id}
-                        toggleOpen={toggleOpen(article.id)}
-                    />
-                </li>)
-            }
+                (article) => {
+                    return (<li key={article.id}>
+                        <Article
+                            article={article}
+                            isOpen={openArticleId === article.id}
+                            toggleOpen={toggleOpen(article.id)}
+                        />
+                    </li>)
+                }
         );
         return (
             <ul>
@@ -37,4 +38,6 @@ class ArticleList extends React.Component {
     }
 }
 
-export default accordeon(ArticleList);
+export default connect(state => ({
+    articles: state.articles
+}))(accordeon(ArticleList))

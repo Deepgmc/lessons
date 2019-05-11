@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import CommentsList from '../CommentsList'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {deleteArticle} from '../../AC';
 import './style.css'
 
 class Article extends Component {
@@ -25,9 +27,16 @@ class Article extends Component {
                 <button onClick = {toggleOpen}>
                     { !isOpen ? 'Открыть статью' : 'Закрыть статью' }
                 </button>
+                <button onClick={this.handleDelete.bind(this)}>Delete</button>
                 {this.getBody()}
             </div>
         )
+    }
+
+    handleDelete(){
+        const {deleteArticle, article} = this.props
+        deleteArticle(article.id)
+        console.log('deleting article')
     }
 
     getBody(){
@@ -41,4 +50,4 @@ class Article extends Component {
 }
 
 
-export default Article;
+export default connect(null, {deleteArticle})(Article)
