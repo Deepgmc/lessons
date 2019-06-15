@@ -3,7 +3,8 @@ import Article from './Article/Article'
 import PropTypes from 'prop-types'
 import accordeon from '../decorators/accordeon'
 import {connect} from 'react-redux';
-import {changeSelect} from "../AC";
+import {changeSelect} from '../AC';
+import {filtratedArticlesSelector} from '../selectors';
 
 class ArticleList extends React.Component {
 
@@ -39,15 +40,8 @@ class ArticleList extends React.Component {
     }
 }
 
-export default connect(({filters, articles}) => {
-    const {selected_id} = filters
-    let filteredArticles = articles.filter(article => {
-        return !selected_id || selected_id === article.id
-    })
-
-    return {
-        articles: filteredArticles
-    }
+export default connect((state) => {
+    return filtratedArticlesSelector(state)
 })(accordeon(ArticleList))
 
 
