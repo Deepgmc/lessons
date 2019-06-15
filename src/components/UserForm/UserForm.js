@@ -2,18 +2,31 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DayPicker from './DayPicker/DayPicker'
 import CommentForm from '../CommentForm/CommentForm'
+import ReactSelect from 'react-select';
+import {connect} from "react-redux";
+import {changeSelect} from "../../AC";
 
 
 class UserForm extends Component {
-    static propTypes = {}
+
+    static propTypes = {
+        articles: PropTypes.array.isRequired
+    }
 
     state = {
         username: ''
     }
 
     render() {
+        const options = this.props.articles.map(article => ({
+            label: article.title,
+            value: article.id
+        }))
+
         return (
             <div>
+                <hr />
+                <ReactSelect options={options} onChange = {this.handleChangeSelection.bind(this)} />
                 <hr />
                 <DayPicker />
                 <CommentForm />
@@ -23,6 +36,12 @@ class UserForm extends Component {
         );
     }
 
+    handleChangeSelection(e){
+        const { changeSelect} = this.props
+        changeSelect(e.value)
+        console.log('change selection handle')
+    }
+
     handleUserChange(e) {
         this.setState({
             username: e.target.value
@@ -30,4 +49,4 @@ class UserForm extends Component {
     }
 }
 
-export default UserForm;
+export default connect(state => ({articles: state.articles}), {changeSelect})(UserForm)
