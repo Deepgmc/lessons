@@ -1,7 +1,10 @@
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import reducer from '../reducer'
+import randomid from '../middlewares/randomid'
 
-const store = createStore(reducer)
+const enhancer = applyMiddleware(randomid)
+
+const store = createStore(reducer, {}, enhancer)
 
 //dev only
 window.store = store

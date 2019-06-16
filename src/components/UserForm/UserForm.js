@@ -5,6 +5,7 @@ import CommentForm from '../CommentForm/CommentForm'
 import ReactSelect from 'react-select';
 import {connect} from "react-redux";
 import {changeSelect} from "../../AC";
+import {mapToArr} from '../../helpers'
 
 
 class UserForm extends Component {
@@ -18,18 +19,17 @@ class UserForm extends Component {
     }
 
     render() {
-        const options = this.props.articles.map(article => ({
+        const articles = this.props.articles
+        const options = articles.map(article => ({
             label: article.title,
             value: article.id
         }))
-
+//<DayPicker /><CommentForm />
         return (
             <div>
                 <hr />
                 <ReactSelect options={options} onChange = {this.handleChangeSelection.bind(this)} />
                 <hr />
-                <DayPicker />
-                <CommentForm />
                 Name: <input type="text" value = {this.state.username} onChange = {this.handleUserChange.bind(this)}/>
                 <hr />
             </div>
@@ -49,4 +49,8 @@ class UserForm extends Component {
     }
 }
 
-export default connect(state => ({articles: state.articles}), {changeSelect})(UserForm)
+export default connect(
+    state => ({
+        articles: mapToArr(state.articles)
+    }), {changeSelect}
+)(UserForm)

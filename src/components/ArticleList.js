@@ -3,7 +3,6 @@ import Article from './Article/Article'
 import PropTypes from 'prop-types'
 import accordeon from '../decorators/accordeon'
 import {connect} from 'react-redux';
-import {changeSelect} from '../AC';
 import {filtratedArticlesSelector} from '../selectors';
 
 class ArticleList extends React.Component {

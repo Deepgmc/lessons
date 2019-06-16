@@ -36,7 +36,6 @@ class Article extends Component {
     handleDelete(){
         const {deleteArticle, article} = this.props
         deleteArticle(article.id)
-        console.log('deleting article')
     }
 
     getBody(){
@@ -44,7 +43,7 @@ class Article extends Component {
         if(!isOpen) return null;
         return <section>
             {article.text}
-            {<CommentsList comments={article.comments} />}
+            {<CommentsList article={article} />}
         </section>
     }
 }
